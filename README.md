@@ -9,7 +9,7 @@ FRON-END:
 - BootStrap
 - UI/UX
 
-BACK END: 03 APIs Restful:
+BACK-END: 03 APIs RESTful:
 
 - ASP.NET Core 6.0.4
 - Entity Framework Core 6.0.5
@@ -18,6 +18,10 @@ BACK END: 03 APIs Restful:
 - Swagger + OpenAPI
 - JWT + Identity (Segurança)
 - Padrões de Projeto: DDD, Repository e Unit of Work
+
+LEIA AS DOCUMENTAÇÕES:
+- Documentacao-Estrutura-Projeto-Loja.
+- Como-Testar-o-Projeto-Loja-API.pdf.
 
 Vídeo de Apresentação deste Projeto: em breve.
 

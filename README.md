@@ -2,7 +2,7 @@ Projeto FullStack desenvolvido com:
 
 FRON-END: 
 
-- ASP.NET Core MVC
+- ASP.NET Core MVC 6
 - HTML 5
 - CSS 3
 - Javascript

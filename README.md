@@ -1,4 +1,15 @@
-Esta API Restful foi desenvolvida com:
+Projeto FullStack desenvolvido com:
+
+FRON-END: 
+
+- ASP.NET Core MVC
+- HTML 5
+- CSS 3
+- Javascript
+- BootStrap
+- UI/UX
+
+BACK END: API Restful:
 
 - ASP.NET Core 6.0.4
 - Entity Framework Core 6.0.5

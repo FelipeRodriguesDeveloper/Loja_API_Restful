@@ -1,20 +1,17 @@
 ﻿@model IEnumerable<Loja.Dominio.Entidades.Categoria>
 
 @{
-    ViewData["Title"] = "Categorias";
+    ViewData["Title"] = "Lista de Categorias";
 }
 
-<h1>Categorias</h1>
-
+<div class=text-center>
+    <h1>Lista de Categorias</h1>
 <p>
-    <a asp-action="CriarCategoria" class="btn btn-primary">Nova Categoria</a>
+    <a asp-controller="Home" asp-action="CriarCategoria" class="btn btn-primary">Nova Categoria</a>
 </p>
 <table id="myTable" class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Codigo)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Titulo)
             </th>
@@ -26,20 +23,18 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Codigo)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.Titulo)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Codigo" class="btn btn-success m-1">Alterar</a>
-                    <a asp-action="DetalharCategoria" asp-route-id="@item.Codigo" class="btn btn-primary m-1">Detalhes</a>
-                    <a asp-action="DeletarCategoria3" asp-route-id="@item.Codigo" class="btn btn-danger m-1">Deletar</a>
+                    <a asp-controller="Home" asp-action="AlterarCategoria" asp-route-codigo="@item.Codigo" class="btn btn-success m-1">Alterar</a>
+                    <a asp-controller="Home" asp-action="DetalharCategoria" asp-route-codigo="@item.Codigo" class="btn btn-primary m-1">Detalhes</a>
+                    <a asp-controller="Home" asp-action="DeletarCategoria" asp-route-codigo="@item.Codigo" class="btn btn-danger m-1">Deletar</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+</div>
 
 @section Scripts{
 <script>

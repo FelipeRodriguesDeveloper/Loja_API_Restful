@@ -11,13 +11,6 @@ namespace Loja.AplicacaoWeb.Controllers
     {
         CategoriasAPI _categoriasAPI = new CategoriasAPI();
 
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         public async Task<IActionResult> Index()
         {
             List<Categoria> categorias = new List<Categoria>();
@@ -34,13 +27,7 @@ namespace Loja.AplicacaoWeb.Controllers
             return View(categorias);
         }
 
-        public async Task<IActionResult> Edit(int codigo)
-        {
-
-            HttpClient client = _categoriasAPI.Iniciar();
-            HttpResponseMessage resposta = await client.GetAsync($"api/v1/categorias/{codigo}");
-            return View();
-        }
+        [HttpGet("DetalharCategoria/{codigo}")]  
         public async Task<IActionResult> DetalharCategoria(int codigo)
         {
             Categoria categoria = new Categoria();
@@ -56,9 +43,13 @@ namespace Loja.AplicacaoWeb.Controllers
 
             return View(categoria);
         }
+        
+        public async Task<IActionResult> CriarCategoria()
+        {
+            return View();  
+        }
 
-
-        [HttpPost]
+        [HttpPost] 
         public async Task<IActionResult> CriarCategoria(Categoria novaCategoria)
         {
             HttpClient client = _categoriasAPI.Iniciar();
@@ -69,13 +60,50 @@ namespace Loja.AplicacaoWeb.Controllers
                 return RedirectToAction("Index");
             }
 
-            //ModelState.AddModelError(String.Empty,"Erro de servidor. Por favor, informe o administrador!");
+            ModelState.AddModelError(String.Empty,"Erro de servidor. Por favor, informe o administrador!");
 
             return View();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletarCategoria3(int codigo)
+        public async Task<IActionResult> AlterarCategoria(int codigo)
+        {
+            Categoria categoria = new Categoria();
+
+            HttpClient client = _categoriasAPI.Iniciar();
+            HttpResponseMessage resposta = await client.GetAsync($"api/v1/categorias/{codigo}");
+
+            if (resposta.IsSuccessStatusCode)
+            {
+                var resultado = resposta.Content.ReadAsStringAsync().Result;
+                categoria = JsonConvert.DeserializeObject<Categoria>(resultado);
+            }
+
+            return View(categoria);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> AlterarCategoria(Categoria categoriaAlterada)
+        {
+            HttpClient client = _categoriasAPI.Iniciar();
+            HttpResponseMessage resposta = await client.PutAsJsonAsync<Categoria>($"api/v1/categorias/{categoriaAlterada.Codigo}", categoriaAlterada);
+
+            if (resposta.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index"); //View(categoriaAlterada);
+            }
+
+            ModelState.AddModelError(String.Empty,"Erro de servidor. Por favor, informe o administrador!");
+
+            return View();
+        }
+
+        public async Task<IActionResult> DeletarCategoria()
+        {
+            return View();
+        }
+     
+        [HttpGet("DeletarCategoria/{codigo}")]
+        public async Task<IActionResult> DeletarCategoria(int codigo)
         {
             HttpClient client = _categoriasAPI.Iniciar();
             HttpResponseMessage resposta = await client.DeleteAsync($"api/v1/categorias/{codigo}");
@@ -85,19 +113,8 @@ namespace Loja.AplicacaoWeb.Controllers
                 return RedirectToAction("Index");
             }
 
-            //ModelState.AddModelError(String.Empty, "Erro de servidor. Por favor, informe o administrador!");
+            ModelState.AddModelError(String.Empty, "Erro de servidor. Por favor, informe o administrador!");
 
-            return View();
-        }
-
-        public async Task<IActionResult> CriarCategoria()
-        {
-
-            return View();
-        }
-
-        public async Task<IActionResult> DeletarCategoria()
-        {
             return View();
         }
 

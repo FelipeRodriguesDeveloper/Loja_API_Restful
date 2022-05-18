@@ -1,17 +1,17 @@
 ﻿@model Loja.Dominio.Entidades.Categoria
 
 @{
-    ViewData["Title"] = "CriarCategoria";
+    ViewData["Title"] = "Criar Categoria";
 }
 
-<h1>Nova Categoria</h1>
+<h1>Criar Categoria</h1>
 <div>
-   <a asp-action="Index" class="btn btn-warning">Voltar</a>
+   <a asp-controller="Home" asp-action="Index" class="btn btn-warning">Voltar</a>
 </div>
 <hr />
 <div class="row">
     <div class="col-md">
-        <form asp-action="CriarCategoria">
+        <form asp-controller="Home" asp-action="CriarCategoria">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Titulo" class="control-label"></label>
